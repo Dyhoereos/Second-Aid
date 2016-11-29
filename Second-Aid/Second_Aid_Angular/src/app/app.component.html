@@ -1,3 +1,32 @@
-<h1>
-  {{title}}
-</h1>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container text-center">
+
+    <button id="loginButton" *ngIf="!displayLogin" class="btn btn-primary" (click)="displayLogin = true">Login</button>
+
+    <!--IF login button clicked, show login fields-->
+    <div class="container" *ngIf="displayLogin == true">
+      <div id="loginForm" >
+        <h1><strong>Login</strong></h1>
+        <div class="form-group">
+          <input class="form-control text-center" placeholder="Username" type="text" [(ngModel)]="user.username">
+        </div>
+        <div class="form-group">
+          <input class="form-control text-center" placeholder="Password" type="password" [(ngModel)]="user.password">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary form-control" (click)="verify(user)">Get Token!</button>
+        </div>
+      </div>
+
+      <!--Token Text-->
+      <div *ngIf="token">
+        <h3> {{token.access_token}}</h3>
+      </div>
+    </div>
+
+  </div>
+</body>
