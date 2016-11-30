@@ -10,6 +10,8 @@ import { ProcComponent } from './proc/proc.component';
 // import { AuthGuard } from './authguard';
 import { AuthService } from './auth.service';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProcDetailComponent } from './proc-detail/proc-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     LoginComponent,
     LogoutComponent,
     ProcComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProfileComponent,
+    ProcDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
           { path: 'logout', component: LogoutComponent },
           // { path: 'procedures', component: ProcComponent, canActivate: [AuthGuard] },
           { path: 'procedures', component: ProcComponent},
+          { path: 'procedures/:id', component: ProcDetailComponent},
+          { path: 'profile', component: ProfileComponent},
           { path: '**', component: NotFoundComponent}
           ])
   ],
