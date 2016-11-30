@@ -1,27 +1,30 @@
 <head>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <div class="container">
+  <nav class="navbar navbar-custom navbar-dark ">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>                    
+        </button>
         <a class="navbar-brand" routerLink="">Second-Aid</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav" routerLinkActive="active">
-            <li class="nav-item"><a class="nav-link" routerLink="">Home</a></li>
+            <li class="active nav-item"><a class="nav-link" routerLink="">Home</a></li>
             <li class="nav-item"><a class="nav-link" routerLink="procedures">Procedure</a></li>
             <li class="nav-item"><a class="nav-link" routerLink="profile">Profile</a></li>
         </ul>
-        <ul class="nav navbar-nav loginLink" routerLinkActive="active">
+        <ul class="nav navbar-nav navbar-right">
             <li class="nav-item"><a class="nav-link" routerLink="login">Login</a></li>
             <li class="nav-item"><a class="nav-link" routerLink="logout">Logout</a></li>
         </ul>
+      </div>
     </div>
   </nav>
   <div class="container text-center">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </body>
