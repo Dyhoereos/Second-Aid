@@ -5,8 +5,8 @@ import {AuthService} from './auth.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [AuthService]
 })
+
 export class AppComponent {
   title = 'app works!';
   

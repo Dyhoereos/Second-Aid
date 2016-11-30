@@ -6,52 +6,41 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProcComponent } from './proc/proc.component';
-import { RouterModule, Routes } from '@angular/router';
-
-const appRoutes: Routes = [
-  {
-      path: '',
-      component: AppComponent
-  },
-  {
-      path: 'procedure',
-      component: ProcComponent
-  },
-  {
-      path: 'login',
-      component: LoginComponent
-  },
-  {
-      path: 'home',
-      redirectTo: '',
-      pathMatch: 'full'
-  },
-  {
-      path: '**',
-      redirectTo: '',
-      pathMatch: 'full'
-  }
-];
+import { AuthService } from './auth.service';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProcDetailComponent } from './proc-detail/proc-detail.component';
+import { RouterModule } from '@angular/router';
+// import { AuthGuard } from './authguard';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LogoutComponent,
-    ProcComponent
+    ProcComponent,
+    NotFoundComponent,
+    ProfileComponent,
+    ProcDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-          { path: '', component: AppComponent },
+          { path: '', component: LoginComponent },
+          { path: 'home', redirectTo: '', pathMatch: 'full' },
           { path: 'login', component: LoginComponent },
           { path: 'logout', component: LogoutComponent },
-          { path: 'procedure', component: ProcComponent }
+          // { path: 'procedures', component: ProcComponent, canActivate: [AuthGuard] },
+          { path: 'procedures', component: ProcComponent},
+          { path: 'procedures/:id', component: ProcDetailComponent},
+          { path: 'profile', component: ProfileComponent},
+          { path: '**', component: NotFoundComponent}
           ])
   ],
-  providers: [],
+  // providers: [AuthService, AuthGuard],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
