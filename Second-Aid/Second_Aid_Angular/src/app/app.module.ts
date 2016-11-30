@@ -7,25 +7,33 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProcComponent } from './proc/proc.component';
+// import { AuthGuard } from './authguard';
+import { AuthService } from './auth.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LogoutComponent,
-    ProcComponent
+    ProcComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-          // { path: '', component: EventComponent },
+          { path: '', component: LoginComponent },
           { path: 'login', component: LoginComponent },
-          { path: 'logout', component: LogoutComponent }
+          { path: 'logout', component: LogoutComponent },
+          // { path: 'procedures', component: ProcComponent, canActivate: [AuthGuard] },
+          { path: 'procedures', component: ProcComponent},
+          { path: '**', component: NotFoundComponent}
           ])
   ],
-  providers: [],
+  // providers: [AuthService, AuthGuard],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
