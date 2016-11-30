@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProcDetailComponent } from './proc-detail/proc-detail.component';
 import { RouterModule } from '@angular/router';
 // import { AuthGuard } from './authguard';
+import { AccordionModule } from 'ng2-accordion';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,13 @@ import { RouterModule } from '@angular/router';
     ProcComponent,
     NotFoundComponent,
     ProfileComponent,
-    ProcDetailComponent
+    ProcDetailComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AccordionModule,    
     RouterModule.forRoot([
           { path: '', component: LoginComponent },
           { path: 'home', redirectTo: '', pathMatch: 'full' },
