@@ -1,0 +1,15 @@
+.btn-primary{
+    background-color: rgba(24, 82, 130,0.5);
+    margin-top: 10px;
+}
+accordion-group{
+    margin-top: 15px;
+}
+.procedure{
+    width: 75%;
+    margin:auto;
+    margin-top: 60px;
+}
+#postSurgeryBtn{
+    margin-top: 10px;
+}
