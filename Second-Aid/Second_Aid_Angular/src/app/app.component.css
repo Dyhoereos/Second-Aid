@@ -16,4 +16,9 @@
 }
 .navbar-custom a {
     color: #E4ECD7;
+    background-color: #4A484D;
+}
+.navbar-custom a:focus {
+    color: #E4ECD7;
+    background-color: #2A282D;
 }
