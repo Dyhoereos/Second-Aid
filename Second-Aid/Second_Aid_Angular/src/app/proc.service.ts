@@ -15,6 +15,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ProcService {
 
+  private CLINIC_URL = "http://secondaid.azurewebsites.net/api/Clinics/";
 	private MEDICATION_URL = "http://2aid.azurewebsites.net/api/Medications";
 	private MEDICATION_INSTRUCIONS_URL = "http://2aid.azurewebsites.net/api/MedicationInstructions";
 	private PREINSTRUCIONS_URL = "http://2aid.azurewebsites.net/api/PreInstructions";
@@ -32,6 +33,13 @@ export class ProcService {
     headers.append('Authorization', `Bearer ${authToken}`);	
     return headers;
   }
+
+  getClinic(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.CLINIC_URL + "1", {headers})
+      .map(response => response.json());
+  }  
 
   getMedication(){
   	let headers = this.getHeaders();
@@ -61,8 +69,7 @@ export class ProcService {
   	let headers = this.getHeaders();
 
   	return this.http.get(this.PROCEDURES_URL, {headers})
-      .toPromise()
-      .then(response => response.json() as Procedure[])
+    .map(response => response.json());
   }
 
   getQuestions(){

@@ -16,13 +16,14 @@ export class ProcDetailComponent implements OnInit {
   }
 
   testGets(): void{
-  	this.procService.getMedication().then(data => console.log("medication " + data));
-    this.procService.getPreinstructions().then(data => console.log("preinstructions " + data));
-    this.procService.getProcedures().then(data => console.log("procedures " + data));
-    this.procService.getQuestions().then(data => console.log("questions " + data));
-    this.procService.getSubprocedures().then(data => console.log("subprocedures " + data));
-    this.procService.getVideos().then(data => console.log("videos " + data));
-    this.procService.getMedicationInstructions().then(data => console.log("medinstr " + data));
+   //  this.procService.getClinic().then(data => console.log(data));
+  	// this.procService.getMedication().then(data => console.log("medication " + data));
+   //  this.procService.getPreinstructions().then(data => console.log("preinstructions " + data));
+   //  this.procService.getProcedures().then(data => console.log(data));
+   //  this.procService.getQuestions().then(data => console.log("questions " + data));
+   //  this.procService.getSubprocedures().then(data => console.log("subprocedures " + data));
+   //  this.procService.getVideos().then(data => console.log("videos " + data));
+   //  this.procService.getMedicationInstructions().then(data => console.log("medinstr " + data));
   }
 
 }
