@@ -1,3 +1,24 @@
-.loginLink{
-    float: right;
+/** List of color used
+*   dark grey: #4A484D
+*   grey: #8A8486
+*   celadon: #8AA383
+*   light grey: #E4ECD7
+*   light pink: #C9ACAE
+*/
+
+.navbar-custom {
+    color: #E4ECD7;
+    background-color: #4A484D;
+}
+.navbar-custom a:hover{
+    color: #1A181D;
+    background-color: #8A8486;
+}
+.navbar-custom a {
+    color: #E4ECD7;
+    background-color: #4A484D;
+}
+.navbar-custom a:focus {
+    color: #E4ECD7;
+    background-color: #2A282D;
 }
