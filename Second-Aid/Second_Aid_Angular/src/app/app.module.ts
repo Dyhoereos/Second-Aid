@@ -32,8 +32,8 @@ import { MedicationComponent } from './medication/medication.component';
     HttpModule,
     AccordionModule,    
     RouterModule.forRoot([
-          { path: '', component: LoginComponent },
-          { path: 'home', redirectTo: '', pathMatch: 'full' },
+          { path: '', redirectTo: 'home', pathMatch: 'full'},
+          { path: 'home', component: LoginComponent },
           { path: 'login', component: LoginComponent },
           { path: 'logout', component: LogoutComponent },
           { path: 'medication', component: MedicationComponent },
