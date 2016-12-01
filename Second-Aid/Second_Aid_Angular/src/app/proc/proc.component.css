@@ -10,6 +10,6 @@ accordion-group{
     margin:auto;
     margin-top: 60px;
 }
-#postSurgeryBtn{
+#postSurgeryBtn, #procedureDetailsBtn{
     margin-top: 10px;
 }
