@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { Clinic } from './proc/shared/clinic';
 import { Medication } from './proc/shared/medication';
 import { MedicationInstruction } from './proc/shared/medicationinstruction';
 import { Preinstruction } from './proc/shared/preinstruction';
@@ -38,7 +39,7 @@ export class ProcService {
     let headers = this.getHeaders();
 
     return this.http.get(this.CLINIC_URL + "1", {headers})
-      .map(response => response.json());
+      .map(response => response.json() as Clinic);
   }  
 
   getMedication(){

@@ -38,7 +38,7 @@ export class ProcComponent implements OnInit {
   getClinic() {
     this.procService.getClinic()
     .subscribe(
-      data => {console.log("getting clinics "); this.clinic = data},
+      data => {console.log("getting clinics"); this.clinic = data},
       err => console.log("get clinic error: " + err)
       );
   }
@@ -49,6 +49,10 @@ export class ProcComponent implements OnInit {
     // for(let p of procList){
     //   console.log(p.);
     // }
+  }
+
+  expandClinic(clinic) {
+    
   }
 
 }
