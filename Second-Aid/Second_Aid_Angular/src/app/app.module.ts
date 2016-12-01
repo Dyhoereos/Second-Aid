@@ -13,6 +13,7 @@ import { ProcDetailComponent } from './proc-detail/proc-detail.component';
 import { RouterModule } from '@angular/router';
 // import { AuthGuard } from './authguard';
 import { AccordionModule } from 'ng2-accordion';
+import { MedicationComponent } from './medication/medication.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AccordionModule } from 'ng2-accordion';
     NotFoundComponent,
     ProfileComponent,
     ProcDetailComponent,
+    MedicationComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { AccordionModule } from 'ng2-accordion';
           { path: 'home', redirectTo: '', pathMatch: 'full' },
           { path: 'login', component: LoginComponent },
           { path: 'logout', component: LogoutComponent },
+          { path: 'medication', component: MedicationComponent },
           // { path: 'procedures', component: ProcComponent, canActivate: [AuthGuard] },
           { path: 'procedures', component: ProcComponent},
           { path: 'procedures/:id', component: ProcDetailComponent},

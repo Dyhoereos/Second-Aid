@@ -1,0 +1,7 @@
+
+
+	<div *ngFor="let m of medication">
+		<p>Drug: {{m.name}}</p>
+		<p>Description: {{m.description}}</p>
+		<p>Instructions: {{(displayMedInfoDesc(m?.medicationId))}}</p>
+	</div>
