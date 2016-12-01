@@ -30,8 +30,8 @@ import { AccordionModule } from 'ng2-accordion';
     HttpModule,
     AccordionModule,    
     RouterModule.forRoot([
-          { path: '', component: LoginComponent },
-          { path: 'home', redirectTo: '', pathMatch: 'full' },
+          { path: '', redirectTo: 'home', pathMatch: 'full'},
+          { path: 'home', component: LoginComponent },
           { path: 'login', component: LoginComponent },
           { path: 'logout', component: LogoutComponent },
           // { path: 'procedures', component: ProcComponent, canActivate: [AuthGuard] },
