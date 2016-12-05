@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Diagnostics;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -22,8 +22,12 @@ namespace Second_Aid.Droid
     public class MainPageActivity : Activity
     {
         private string token;
+        private List<string> items = new List<string>();
+        private List<string> idItems = new List<string>();
+        private List<string> idDescription = new List<string>();
+        private List<string> medicationId = new List<string>();
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -40,27 +44,66 @@ namespace Second_Aid.Droid
                 logout();
             };
 
-            Button medicationsBtn = FindViewById<Button>(Resource.Id.medications_button);
-            medicationsBtn.Click += (object sender, EventArgs args) =>
-            {
-                Intent scheduleActivityIntent = new Intent(this, typeof(MedicationsActivity));
-                scheduleActivityIntent.PutExtra(Constants.TOKEN_KEY, this.token);
-                StartActivity(scheduleActivityIntent);
-            };
 
-            Button subProceduresBtn = FindViewById<Button>(Resource.Id.subProcedures_button);
-            subProceduresBtn.Click += (object sender, EventArgs args) =>
-            {
-                if (token != null)
-                {
-                    Intent scheduleActivityIntent = new Intent(this, typeof(SubProcedureActivity));
-                    scheduleActivityIntent.PutExtra(Constants.TOKEN_KEY, token);
-                    StartActivity(scheduleActivityIntent);
-                }
-            };
+            items = await getProcedureID();
+            idItems = await getProcedure(items);
+
+            var adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, idItems);
+            dataDisplay.Adapter = adapter;
+
+            dataDisplay.ItemClick += listviewClicked;
+
+
         }
 
-        private async Task<List<string>> getMedications()
+        void listviewClicked(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            Intent proceduresActivityIntent = new Intent(this, typeof(ProcedureActivity));
+
+            proceduresActivityIntent.PutExtra(Constants.PROCEDURE_KEY, idItems[e.Position]);
+            proceduresActivityIntent.PutExtra(Constants.PROCEDUREID_KEY, items[e.Position]);
+            proceduresActivityIntent.PutExtra(Constants.PROCEDUREDESC_KEY, idDescription[e.Position]);
+            proceduresActivityIntent.PutStringArrayListExtra(Constants.MEDICATION_KEY, medicationId);
+            proceduresActivityIntent.PutExtra(Constants.TOKEN_KEY, token);
+
+            StartActivity(proceduresActivityIntent);
+        }
+
+        private async Task<List<string>> getProcedureID()
+        {
+            using (var client = new HttpClient())
+            {
+
+                client.DefaultRequestHeaders.Add("Authorization", String.Format("Bearer {0}", this.token));
+
+                var response = await client.GetAsync(Constants.BASE_URL + Constants.GETPROCEDUREID_URL);
+
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                var responseMArray = JsonConvert.DeserializeObject<List<PatientProcedures>>(responseString);
+
+                List<string> data = new List<string>();
+
+                foreach (var patientProcedures in responseMArray)
+                {
+
+                    if (!data.Contains(patientProcedures.procedureId.ToString()))
+                    {
+                        data.Add(patientProcedures.procedureId.ToString());
+
+                        if (!medicationId.Contains(patientProcedures.MedicationId.ToString()))
+                        {
+                            medicationId.Add(patientProcedures.MedicationId.ToString());
+                        }
+                    }
+
+                }
+
+                return data;
+            }
+        }
+
+        private async Task<List<string>> getProcedure(List<string> id)
         {
             using (var client = new HttpClient())
             {
@@ -68,21 +111,30 @@ namespace Second_Aid.Droid
                 // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer ", this.token);
                 client.DefaultRequestHeaders.Add("Authorization", String.Format("Bearer {0}", this.token));
 
-                var response = await client.GetAsync(Constants.BASE_URL + Constants.MEDICATION_URL);
+                var response = await client.GetAsync(Constants.BASE_URL + Constants.PROCEDUREID_URL);
 
                 var responseString = await response.Content.ReadAsStringAsync();
 
-                var responseMArray = JsonConvert.DeserializeObject<List<Medication>>(responseString);
+                var responseMArray = JsonConvert.DeserializeObject<List<Procedure>>(responseString);
 
                 List<string> data = new List<string>();
-                foreach (var medication in responseMArray)
+                foreach (var patientProcedures in responseMArray)
                 {
-                    data.Add(medication.Name);
+                    foreach (var checkName in id)
+                    {
+                        if (patientProcedures.procedureId.ToString().Equals(checkName))
+                        {
+                            data.Add(patientProcedures.name);
+                            idDescription.Add(patientProcedures.description);
+                        }
+                    }
+
                 }
 
-                return data; 
+                return data;
             }
         }
+
 
         public override void OnBackPressed()
         {

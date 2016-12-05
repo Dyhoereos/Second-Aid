@@ -15,22 +15,27 @@
     font-size:18px;
 }
 #loginForm{
-    background-color: #E4ECD7;
+    background-color: #F5F5F5;
     padding-top: 30px;
     width: 80%;
     margin-left:auto;
     margin-right:auto;
     margin-top:30px;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
 }
 
 #loginForm-up{
-    background-color: #E4ECD7;
+    background-color: #F5F5F5;
 }
 
 #loginForm-down{
     margin-top: 40px;
     background-color: #4A484D;
     height: 140px;
+    border-bottom: 1px solid #DDDDDD;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 #form-title{
     padding-bottom: 20px;

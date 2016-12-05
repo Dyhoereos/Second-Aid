@@ -1,0 +1,36 @@
+<!--<div *ngFor="let m of medication">
+	<p>Drug: {{m.name}}</p>
+	<p>Description: {{m.description}}</p>
+	<p>Instructions: {{(displayMedInfoDesc(m?.medicationId))}}</p>
+</div>-->
+<table class="table">
+<thead>
+        <tr>
+            <th>
+                Drug
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Instructions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr *ngFor="let m of medication">
+            <td>
+				{{m.name}}
+            </td>
+            <td>
+                {{m.description}}
+            </td>
+            <td>
+                {{(displayMedInfoDesc(m?.medicationId))}}
+            </td>
+        </tr>
+	</tbody>
+</table>
+<div>
+	<a class="backBtn" routerLink="../procedures">Back</a>
+</div>

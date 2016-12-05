@@ -24,7 +24,6 @@ export class ProcComponent implements OnInit {
   	}
     this.getProcedures();
     this.getClinic();
-
   }
 
   getProcedures() { 
@@ -53,6 +52,11 @@ export class ProcComponent implements OnInit {
 
   expandClinic(clinic) {
     
+  }
+
+  
+  loadMeds(){
+    this.router.navigate(['medication']);
   }
 
 }
