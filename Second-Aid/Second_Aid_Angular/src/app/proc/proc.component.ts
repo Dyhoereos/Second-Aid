@@ -5,7 +5,7 @@ import { ProcService } from '../proc.service';
 import { Procedure } from './shared/procedure';
 import { Clinic } from './shared/clinic';
 import { Patientproc } from '../Patientproc';
-import {Schedule} from '../Schedule'
+import { Schedule } from '../Schedule'
 
 @Component({
   selector: 'app-proc',

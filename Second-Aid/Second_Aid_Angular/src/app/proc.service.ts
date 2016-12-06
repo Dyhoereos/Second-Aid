@@ -97,7 +97,14 @@ export class ProcService {
     .map(response => response.json() as Procedure);
   }
 
-  getQuestions(id){
+  getQuestions(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.QUESTIONS_URL, {headers})
+      .map(response => response.json());
+  }
+
+  getQuestion(id){
   	let headers = this.getHeaders();
 
   	return this.http.get(this.QUESTIONS_URL + "/" + id, {headers})

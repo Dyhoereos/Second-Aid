@@ -34,7 +34,6 @@ export class ProcDetailComponent implements OnInit {
       this.router.navigate(['logout']);
     }
 
-    this.route.params
     this.getProcedure(this.route.snapshot.params['id']);
     this.getAllVideosAndPreinstructions();
   }

@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 // import { AuthGuard } from './authguard';
 import { AccordionModule } from 'ng2-accordion';
 import { MedicationComponent } from './medication/medication.component';
+import { QuestionComponent } from './question/question.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MedicationComponent } from './medication/medication.component';
     ProfileComponent,
     ProcDetailComponent,
     MedicationComponent,
+    QuestionComponent,
   ],
   imports: [
     BrowserModule,
