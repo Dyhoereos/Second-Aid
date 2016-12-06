@@ -25,3 +25,6 @@ a.backBtn:hover{
     border: solid 0px #567350;
     color: #FFFFFF;
 }
+#backBtnArea{
+    padding-bottom: 50px;
+}

@@ -95,7 +95,7 @@ expandProcedures(procedures: Procedure[]) {
 
 
   getClinic() {
-    this.procService.getClinic()
+    this.procService.getClinic(localStorage.getItem('clinic'))
     .subscribe(
       data => {console.log("getting clinics"); this.clinic = data},
       err => console.log("get clinic error: " + err)

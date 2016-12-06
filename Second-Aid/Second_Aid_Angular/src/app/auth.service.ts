@@ -26,10 +26,10 @@ export class AuthService {
   //     .catch(this.handleError);
   // }
 
-    login(username, password) {
+    login(username, password, clinic) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let creds: string = 'username='+username+'&password='+password+'&grant_type=password'+'&clinic_id=1';
+    let creds: string = 'username='+username+'&password='+password+'&grant_type=password'+'&clinic_id='+clinic;
     return this.http
       .post(
         this.BASE_URL + '/connect/token',
@@ -43,6 +43,7 @@ export class AuthService {
           var expiryTime = new Date();
           expiryTime.setSeconds(expiryTime.getSeconds() + res.expires_in)
           localStorage.setItem('expiry_time', expiryTime.toUTCString())
+          localStorage.setItem('clinic', clinic)
           return true;
         }
         return false;
@@ -64,6 +65,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('expiry_time');
+    localStorage.removeItem('clinic');
   }
 
 }

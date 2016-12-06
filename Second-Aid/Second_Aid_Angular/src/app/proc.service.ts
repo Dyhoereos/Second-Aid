@@ -42,12 +42,19 @@ export class ProcService {
     return headers;
   }
 
-  getClinic(){
+  getClinic(id){
     let headers = this.getHeaders();
 
-    return this.http.get(this.CLINIC_URL + "1", {headers})
+    return this.http.get(this.CLINIC_URL + id, {headers})
       .map(response => response.json());
-  }  
+  }
+
+  getClinics(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.CLINIC_URL, {headers})
+      .map(response => response.json());
+  }
 
   getMedication(){
   	let headers = this.getHeaders();
