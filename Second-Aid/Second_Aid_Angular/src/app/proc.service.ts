@@ -23,6 +23,7 @@ export class ProcService {
 	private PROCEDURES_URL = "http://secondaid.azurewebsites.net/api/Procedures";
 	private QUESTIONS_URL = "http://secondaid.azurewebsites.net/api/Questionnaires/"; // takes subprocedure id
 	private SUBPROCEDURES_URL = "http://secondaid.azurewebsites.net/api/SubProcedures";
+  private PATIENT_URL = "http://secondaid.azurewebsites.net/api/UserInfo";
 	private VIDEOS_URL = "http://secondaid.azurewebsites.net/api/Videos";
 
   constructor(private http: Http) { }
@@ -102,6 +103,13 @@ export class ProcService {
   	let headers = this.getHeaders();
 
   	return this.http.get(this.SUBPROCEDURES_URL + "/" + id, {headers})
+      .map(response => response.json());
+  }
+
+  getPatient(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PATIENT_URL, {headers})
       .map(response => response.json());
   }
 

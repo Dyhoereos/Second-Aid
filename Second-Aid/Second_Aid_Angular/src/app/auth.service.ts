@@ -57,8 +57,6 @@ export class AuthService {
     // compare token expiry time with current time
     let expiryTime = new Date(localStorage.getItem('expiry_time'));
     let currentTime = new Date();
-    console.log("current time " + currentTime.toUTCString());
-    console.log("expiry time " + expiryTime.toUTCString());
     
     return expiryTime.toUTCString() > currentTime.toUTCString();
   }
