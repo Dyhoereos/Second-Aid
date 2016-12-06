@@ -12,7 +12,7 @@
     </div>
   </form>
 </div>
-
+<label id="login-warning" *ngIf="error">{{error}}</label>
 <!--Token Text-->
 <div *ngIf="token">
   <h3> {{token.access_token}}</h3>

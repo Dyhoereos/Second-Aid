@@ -41,6 +41,10 @@
     padding-bottom: 20px;
 }
 
+#login-warning {
+    color: red;
+}
+
 @media (min-width: 768px) {
     .form-control{
         width: 300px;

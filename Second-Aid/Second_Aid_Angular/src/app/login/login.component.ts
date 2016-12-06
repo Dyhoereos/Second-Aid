@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   token: Token;
-  user:User = new User();
+  user: User = new User();
+  error: string;
 
   constructor(private AuthService: AuthService, private router: Router) { }
 
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.AuthService.login(username, password)
       .subscribe( 
         data =>  {console.log("logged in: " + data); this.router.navigate(['/procedures']);},
-        err => console.log("verify error" + err) // TODO: handle error
+        err => {console.log("login error " + err); this.error = "Login failed. Please check your username, password or clinic id.";}
       );
   }
 
