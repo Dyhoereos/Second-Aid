@@ -17,9 +17,10 @@ export class ProcComponent implements OnInit {
   procedures: Array<Procedure> = [];
   clinic: Clinic;
   patientProcedures: Array<number>=[];
+  patientProceduresObj: Array<Patientproc>;
   schedule: Array<Date> = [];
-  patientMeds: Array<number>=[];
   isComplete: Array<Boolean>=[];
+  patientMeds: Array<Patientproc>=[];
 
   constructor(private AuthService: AuthService, private router: Router, private procService: ProcService) { }
 
@@ -31,6 +32,7 @@ export class ProcComponent implements OnInit {
   	}
     this.getPatientSchedule();
     this.getClinic();
+    this.getPatientProcedures();
   }
 //**********Get Patient Schedule**********
  getPatientSchedule() { 
@@ -66,7 +68,7 @@ expandProcedures(procedures: Procedure[]) {
     var j = 0;
     while(i< this.patientProcedures.length){
       if(procedures[j].procedureId == this.patientProcedures[i]){
-         this.procedures.push(procedures[j]);
+        this.procedures.push(procedures[j]);
         i++;
         //j=0; should be in order
       }
@@ -84,13 +86,15 @@ expandProcedures(procedures: Procedure[]) {
       );
   }
 
-  extractProcedureInfo(procedures: Patientproc[]){
+  extractProcedureInfo(patientProcs){
     //save all patient's procedure ids
-    for(var i = 0; i<procedures.length; i++){
-      this.patientProcedures.push(procedures[i].procedureId);
-    }
-    //call procedures
-    this.getProcedures();
+    for(let p of this.patientProcedures) {
+        for (let pp of patientProcs){
+          if (p == pp.procedureId){
+              this.patientMeds.push(pp);
+          }
+        }
+    }    
   }
 
 
@@ -105,13 +109,13 @@ expandProcedures(procedures: Procedure[]) {
       );
   }
 
-
   expandClinic(clinic) {
     
   }
 
-  
-  loadMeds(){
+  loadMeds(id){
+
+    this.patientMedsToStorage(id);
     this.router.navigate(['medication']);
   }
 
@@ -119,5 +123,19 @@ expandProcedures(procedures: Procedure[]) {
     this.router.navigate(['procedures/' + id]);
   }
 
+  patientMedsToStorage(id){
+    console.log("pushing medication string to storage");
+    var medString = "";
+    for (let p of this.patientMeds){
+      console.log("p " + p);
+        if (p.procedureId == Number(id)){
+            medString += String(p.medicationId) + ",";
+        }
+    }
+    medString = medString.slice(0, -1);
+    
+    console.log("med string is " + medString);
+    localStorage.setItem('medication_ids', medString);
+  }
 
 }
