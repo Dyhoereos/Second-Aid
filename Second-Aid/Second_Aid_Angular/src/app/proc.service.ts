@@ -8,6 +8,8 @@ import { Procedure } from './proc/shared/procedure';
 import { Question } from './proc/shared/question';
 import { Subprocedure } from './proc/shared/subprocedure';
 import { Video } from './proc/shared/video';
+import { Patientproc } from './Patientproc';
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -17,30 +19,39 @@ import 'rxjs/add/operator/toPromise';
 export class ProcService {
 
   private CLINIC_URL = "http://secondaid.azurewebsites.net/api/Clinics/";
-	private MEDICATION_URL = "http://2aid.azurewebsites.net/api/Medications";
+	private MEDICATION_URL = "http://secondaid.azurewebsites.net/api/Medications";
 	private MEDICATION_INSTRUCIONS_URL = "http://secondaid.azurewebsites.net/api/MedicationInstructions";
-	private PREINSTRUCIONS_URL = "http://2aid.azurewebsites.net/api/PreInstructions";
-	private PROCEDURES_URL = "http://2aid.azurewebsites.net/api/Procedures";
+	private PREINSTRUCIONS_URL = "http://secondaid.azurewebsites.net/api/PreInstructions";
+	private PROCEDURES_URL = "http://secondaid.azurewebsites.net/api/Procedures";
 	private QUESTIONS_URL = "http://secondaid.azurewebsites.net/api/Questionnaires/"; // takes subprocedure id
-	private SUBPROCEDURES_URL = "http://2aid.azurewebsites.net/api/SubProcedures";
-	private VIDEOS_URL = "http://2aid.azurewebsites.net/api/Videos";
+	private SUBPROCEDURES_URL = "http://secondaid.azurewebsites.net/api/SubProcedures";
+  private PATIENT_URL = "http://secondaid.azurewebsites.net/api/UserInfo";
+	private VIDEOS_URL = "http://secondaid.azurewebsites.net/api/Videos";
+  private PATIENTPROC_URL = "http://secondaid.azurewebsites.net/api/patientprocedures";
 
   constructor(private http: Http) { }
 
   getHeaders(){
-  	let headers = new Headers();
-    headers.append('Accept', 'application/json');
-    let authToken = localStorage.getItem('auth_token');
-    headers.append('Authorization', `Bearer ${authToken}`);	
+    	let headers = new Headers();
+      headers.append('Accept', 'application/json');
+      let authToken = localStorage.getItem('auth_token');
+      headers.append('Authorization', `Bearer ${authToken}`);	
     return headers;
   }
 
-  getClinic(){
+  getClinic(id){
     let headers = this.getHeaders();
 
-    return this.http.get(this.CLINIC_URL + "1", {headers})
+    return this.http.get(this.CLINIC_URL + id, {headers})
       .map(response => response.json());
-  }  
+  }
+
+  getClinics(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.CLINIC_URL, {headers})
+      .map(response => response.json());
+  }
 
   getMedication(){
   	let headers = this.getHeaders();
@@ -56,10 +67,17 @@ export class ProcService {
       .map(response => response.json());
   }
 
-  getPreinstructions(){
+  getPreinstruction(id){
   	let headers = this.getHeaders();
 
-  	return this.http.get(this.PREINSTRUCIONS_URL, {headers})
+  	return this.http.get(this.PREINSTRUCIONS_URL + "/" + id, {headers})
+      .map(response => response.json());
+  }
+
+  getPreinstructions(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PREINSTRUCIONS_URL, {headers})
       .map(response => response.json());
   }
 
@@ -70,24 +88,59 @@ export class ProcService {
     .map(response => response.json());
   }
 
-  getQuestions(){
+  getProcedure(id){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PROCEDURES_URL + "/" + id, {headers})
+    .map(response => response.json() as Procedure);
+  }
+
+  getQuestions(id){
   	let headers = this.getHeaders();
 
-  	return this.http.get(this.QUESTIONS_URL + "1", {headers})
+  	return this.http.get(this.QUESTIONS_URL + "/" + id, {headers})
       .map(response => response.json());
   }
 
   getSubprocedures(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.SUBPROCEDURES_URL, {headers})
+      .map(response => response.json());
+  }
+
+  getSubprocedure(id){
   	let headers = this.getHeaders();
 
-  	return this.http.get(this.SUBPROCEDURES_URL, {headers})
+  	return this.http.get(this.SUBPROCEDURES_URL + "/" + id, {headers})
+      .map(response => response.json());
+  }
+
+  getPatient(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PATIENT_URL, {headers})
+      .map(response => response.json());
+  }
+
+  getVideo(id){
+  	let headers = this.getHeaders();
+
+  	return this.http.get(this.VIDEOS_URL + "/" + id, {headers})
       .map(response => response.json());
   }
 
   getVideos(){
-  	let headers = this.getHeaders();
+    let headers = this.getHeaders();
 
-  	return this.http.get(this.VIDEOS_URL, {headers})
+    return this.http.get(this.VIDEOS_URL, {headers})
       .map(response => response.json());
+  }
+
+  getPatientProcedure(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PATIENTPROC_URL, {headers})
+      .map(response => response.json() as Patientproc[]);
   }
 }

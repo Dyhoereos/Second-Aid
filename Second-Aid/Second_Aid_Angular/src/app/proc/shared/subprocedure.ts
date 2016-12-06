@@ -2,7 +2,7 @@ import { Preinstruction } from './preinstruction';
 import { Video } from './video';
 
 export class Subprocedure {
-	subprocedureId: number;
+	subProcedureId: number;
 	name: string;
 	description: string;
 	procedureId: number;

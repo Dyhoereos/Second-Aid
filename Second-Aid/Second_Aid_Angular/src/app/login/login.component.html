@@ -1,20 +1,21 @@
-<div id="loginForm" >
+<div id="loginForm" *ngIf="clinic">
   <div id="loginForm-up" >
     <h1 id="form-title"><strong>Login</strong></h1>
   </div>
-  <form (ngSubmit)="verify(username.value, password.value)">
+  <form (ngSubmit)="verify(username.value, password.value, clinicid.value)">
     <div id="loginForm-up" >
         <input class="form-control text-center" placeholder="Username" type="text" #username>
         <input class="form-control text-center" placeholder="Password" type="password" #password>
+        <select class="form-control text-center" #clinicid >
+            <option *ngFor="let c of clinic" value="{{c.clinicId}}" >{{c.clinicName}}</option>
+        </select>
     </div>
     <div id="loginForm-down">
         <button type="submit" class="btn btn-primary form-control" id="loginButton">Login</button>
     </div>
   </form>
 </div>
+<label id="login-warning" *ngIf="error">{{error}}</label>
 
-<!--Token Text-->
-<div *ngIf="token">
-  <h3> {{token.access_token}}</h3>
-</div>
+
 

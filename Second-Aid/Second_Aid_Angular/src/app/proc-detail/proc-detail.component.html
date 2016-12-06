@@ -1,3 +1,83 @@
-<p>
-  proc-detail works!
-</p>
+<div *ngIf="procedure && neededSubprocedures && preinstructions && videos">
+	<div id="proc-detail-title">
+		<div id="proc-detail-subtitle">Procedure: </div>
+		<div id="proc-detail-subtitle">{{procedure.name}}</div>
+	</div>
+	<div *ngFor="let s of neededSubprocedures">
+		<table class="table">
+			<thead>
+				<tr>
+			 		<th class="col-xs-5 col-sm-3 col-lg-3">
+						Subprocedure:
+					</th>
+					<th class="col-xs-7 col-sm-9 col-lg-9">
+						Description: 
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						{{s.name}}
+					</td>
+					<td>
+						{{s.description}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table" *ngFor="let p of (getPreinstructions(s.subProcedureId))">
+			<thead>
+			<tr>
+				<th class="col-xs-5 col-sm-3 col-lg-3">
+					Preinstruction title:
+				</th>
+				<th class="col-xs-7 col-sm-9 col-lg-9">
+					Description: 
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						{{p.title}}
+					</td>
+					<td>
+						{{p.description}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table" *ngFor="let v of getVideos(s.subProcedureId)">
+			<thead>
+				<tr>
+					<th class="col-xs-3 col-sm-3 col-lg-3">
+						Video title:
+					</th>
+					<th class="col-xs-4 col-sm-4 col-lg-4">
+						Description: 
+					</th>
+					<th class="col-xs-5 col-sm-5 col-lg-5">
+						Link: 
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						{{v.title}}
+					</td>
+					<td>
+						{{v.description}}
+					</td>
+					<td>
+						<a>{{v.url}}</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="backBtnArea">
+	<a class="backBtn" routerLink="../">Back</a>
+</div>
