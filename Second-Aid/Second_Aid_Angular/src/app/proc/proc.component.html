@@ -1,6 +1,6 @@
 <div *ngIf="procedures && clinic" class="procedure">
 
-    <accordion *ngFor="let p of procedures" [showArrows]="true" [closeOthers]="false" [expandAll]="false">
+    <accordion *ngFor="let p of procedures; let i = index;" [showArrows]="true" [closeOthers]="false" [expandAll]="false">
 
         <!-- Procedure Description Modal-->
         <div id="procDescModal" class="modal fade" role="dialog">
@@ -34,7 +34,7 @@
                     <label class="form-control"> Doctor: {{clinic.firstName}} {{clinic.lastName}}</label>
                 </div>
                 <div class="col-lg-6">
-                    <label class="form-control"> Time: ???</label>
+                    <label class="form-control"> Time:  {{schedule[i] +"-08:00" | date: "hh:mm a"}}</label>
                 </div>
             </div>
             <div class="row text-center">

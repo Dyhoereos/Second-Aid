@@ -5,6 +5,7 @@ import { ProcService } from '../proc.service';
 import { Procedure } from './shared/procedure';
 import { Clinic } from './shared/clinic';
 import { Patientproc } from '../Patientproc';
+import {Schedule} from '../Schedule'
 
 @Component({
   selector: 'app-proc',
@@ -16,6 +17,8 @@ export class ProcComponent implements OnInit {
   procedures: Array<Procedure> = [];
   clinic: Clinic;
   patientProcedures: Array<number>=[];
+  schedule: Array<Date> = [];
+  patientMeds: Array<number>=[];
   constructor(private AuthService: AuthService, private router: Router, private procService: ProcService) { }
 
   ngOnInit() {
@@ -24,18 +27,52 @@ export class ProcComponent implements OnInit {
   		console.log("user is not logged in. redirecting to login");
   		this.router.navigate(['logout']);
   	}
-    this.getPatientProcedures();
+    this.getPatientSchedule();
     this.getClinic();
   }
+//**********Get Patient Schedule**********
+ getPatientSchedule() { 
+    this.procService.getPatientSchedule()
+    .subscribe(
+      data => {console.log("getting patient procedures "); this.extractScheduleInfo(data)},
+      err => console.log("get patient procedure error: " + err)
+      );
+  }
+  
+extractScheduleInfo(procedures: Schedule[]){
+    //save all patient's procedure ids
+    for(var i = 0; i<procedures.length; i++){
+      this.patientProcedures.push(procedures[i].procedureId);
+      this.schedule.push(procedures[i].time);
+      console.log(this.schedule[i]);
+    }
+    //call procedures
+    this.getProcedures();
+  }
 
-  // getProcedures() { 
-  //   this.procService.getProcedures()
-  //   .subscribe(
-  //     data => {console.log("getting procedures "); this.expandProcedures(data)},
-  //     err => console.log("get procedure error: " + err)
-  //     );
-  // }
-
+getProcedures() { 
+    this.procService.getProcedures()
+        .subscribe(
+          data => {console.log("getting procedures "); this.expandProcedures(data)},
+          err => console.log("get procedure error: " + err)
+          );
+}
+  
+expandProcedures(procedures: Procedure[]) {
+    var i = 0;
+    var j = 0;
+    while(i< this.patientProcedures.length){
+      if(procedures[j].procedureId == this.patientProcedures[i]){
+         this.procedures.push(procedures[j]);
+        i++;
+        //j=0; should be in order
+      }
+      else
+        j++;
+    }
+}
+//**********end Patient Schedule**********
+//**********Procedure Start*****************
  getPatientProcedures() { 
     this.procService.getPatientProcedure()
     .subscribe(
@@ -53,27 +90,8 @@ export class ProcComponent implements OnInit {
     this.getProcedures();
   }
 
-  getProcedures() { 
-    this.procService.getProcedures()
-        .subscribe(
-          data => {console.log("getting procedures "); this.expandProcedures(data)},
-          err => console.log("get procedure error: " + err)
-          );
-    }
-  
-  expandProcedures(procedures: Procedure[]) {
-    var i = 0;
-    var j = 0;
-    while(i< this.patientProcedures.length){
-      if(procedures[j].procedureId == this.patientProcedures[i]){
-         this.procedures.push(procedures[j]);
-        i++;
-        //j=0; should be in order
-      }
-      else
-        j++;
-    }
-  }
+
+  //**********Procedure End*****************
 
 
   getClinic() {
