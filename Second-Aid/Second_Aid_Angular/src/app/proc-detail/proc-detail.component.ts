@@ -85,9 +85,8 @@ export class ProcDetailComponent implements OnInit {
        for(let v of this.videos){
            if (v.subProcedureId == id){
               tmp.push(v);
+            }
        }
        return tmp;
    }
-
-
 }
