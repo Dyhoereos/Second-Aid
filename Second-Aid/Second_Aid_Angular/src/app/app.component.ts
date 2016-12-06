@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import {AuthService} from './auth.service';
 
 @Component({
@@ -10,8 +10,15 @@ import {AuthService} from './auth.service';
 export class AppComponent {
   title = 'app works!';
   
-  constructor() { }
+  constructor(private AuthService: AuthService) {
+   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.AuthService.isLoggedIn()){
+      this.loggedIn=true;
+    } else {
+      this.loggedIn=false;
+    }
+  }
 
 }
