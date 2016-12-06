@@ -1,6 +1,26 @@
-<div *ngIf="procedures && clinic" class="procedure" >
+<div *ngIf="procedures && clinic" class="procedure">
+
     <accordion *ngFor="let p of procedures" [showArrows]="true" [closeOthers]="false" [expandAll]="false">
-        <accordion-group heading="{{p.name}}" >
+
+        <!-- Procedure Description Modal-->
+        <div id="procDescModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{p.name}} Procedure Description</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{p.description}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <accordion-group heading="{{p.name}}">
             <div class="row">
                 <div class="col-lg-6 ">
                     <label class="form-control"> Clinic: {{clinic.clinicName}}</label>
@@ -23,6 +43,11 @@
                 </div>
                 <div class="col-lg-6">
                     <button class="btn btn-primary btn-block" (click)="loadProcDetails(p.procedureId)"> Instruction </button>
+                </div>
+            </div>
+            <div class="row" id="procedureDetailsBtn">
+                <div class="col-lg-12">
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#procDescModal"> Procedure Details </button>
                 </div>
             </div>
             <div *ngIf="true" class="row" id="postSurgeryBtn">

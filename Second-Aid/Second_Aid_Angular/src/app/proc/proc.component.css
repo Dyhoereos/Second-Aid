@@ -13,7 +13,7 @@ accordion-group{
     margin-right: auto;
     margin-top: 20px;
 }
-#postSurgeryBtn{
+#postSurgeryBtn, #procedureDetailsBtn{
     margin-top: 10px;
 }
 
