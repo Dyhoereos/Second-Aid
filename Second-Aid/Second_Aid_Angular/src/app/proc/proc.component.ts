@@ -19,6 +19,8 @@ export class ProcComponent implements OnInit {
   patientProcedures: Array<number>=[];
   schedule: Array<Date> = [];
   patientMeds: Array<number>=[];
+  isComplete: Array<Boolean>=[];
+
   constructor(private AuthService: AuthService, private router: Router, private procService: ProcService) { }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ extractScheduleInfo(procedures: Schedule[]){
     for(var i = 0; i<procedures.length; i++){
       this.patientProcedures.push(procedures[i].procedureId);
       this.schedule.push(procedures[i].time);
+      this.isComplete.push(procedures[i].isCompleted)
       console.log(this.schedule[i]);
     }
     //call procedures
