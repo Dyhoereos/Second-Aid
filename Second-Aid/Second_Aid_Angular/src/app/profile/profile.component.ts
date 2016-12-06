@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   	  	// redirect to login if not logged in 
   	if (!this.AuthService.isLoggedIn()){
   		console.log("user is not logged in. redirecting to login");
-  		this.router.navigate(['login']);
+  		this.router.navigate(['logout']);
   	}
   }
 }

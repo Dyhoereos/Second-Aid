@@ -28,10 +28,10 @@ export class ProcService {
   constructor(private http: Http) { }
 
   getHeaders(){
-  	let headers = new Headers();
-    headers.append('Accept', 'application/json');
-    let authToken = localStorage.getItem('auth_token');
-    headers.append('Authorization', `Bearer ${authToken}`);	
+    	let headers = new Headers();
+      headers.append('Accept', 'application/json');
+      let authToken = localStorage.getItem('auth_token');
+      headers.append('Authorization', `Bearer ${authToken}`);	
     return headers;
   }
 
