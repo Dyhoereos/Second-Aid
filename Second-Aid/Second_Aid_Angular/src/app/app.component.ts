@@ -14,11 +14,6 @@ export class AppComponent {
    }
 
   ngOnInit(): void {
-    if (this.AuthService.isLoggedIn()){
-      this.loggedIn=true;
-    } else {
-      this.loggedIn=false;
-    }
   }
 
 }
