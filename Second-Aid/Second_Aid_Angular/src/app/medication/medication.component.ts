@@ -20,7 +20,7 @@ export class MedicationComponent implements OnInit {
   ngOnInit() {
   	if (!this.AuthService.isLoggedIn()) {
   		console.log("user is not logged in. redirecting to login");
-  		this.router.navigate(['login']);
+  		this.router.navigate(['logout']);
   	}
     this.getMedication()
   }

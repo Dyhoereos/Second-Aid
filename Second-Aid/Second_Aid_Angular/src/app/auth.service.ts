@@ -5,9 +5,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 
+
 @Injectable()
 export class AuthService {
-  
   BASE_URL = "http://secondaid.azurewebsites.net"
 
   constructor(private http: Http) {}
@@ -40,25 +40,13 @@ export class AuthService {
       .map((res) => {
         if (res.access_token) {
           localStorage.setItem('auth_token', res.access_token);
+          var expiryTime = new Date();
+          expiryTime.setSeconds(expiryTime.getSeconds() + res.expires_in)
+          localStorage.setItem('expiry_time', expiryTime.toUTCString())
           return true;
         }
         return false;
       });
-  }
-
-  validateToken(token){
-    //make call to check token
-    //return true if token is valid, else delete token from localstorage and return false
-    return true;
-    // localStorage.removeItem('auth_token');
-    // return false;
-
-  }
-
-// ERROR HANDLER
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
   }
 
   isLoggedIn() {
@@ -66,15 +54,16 @@ export class AuthService {
     let authToken = localStorage.getItem('auth_token');
     if (authToken === null) return false;
     
-    // if token exists, check if token is valid
-    let validToken = this.validateToken(authToken);
-    if (!validToken) return false;
-
-    return true;
+    // compare token expiry time with current time
+    let expiryTime = new Date(localStorage.getItem('expiry_time'));
+    let currentTime = new Date();
+    
+    return expiryTime.toUTCString() > currentTime.toUTCString();
   }
 
   logout() {
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('expiry_time');
   }
 
 }

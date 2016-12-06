@@ -29,6 +29,11 @@ export class ProcDetailComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    if (!this.AuthService.isLoggedIn()) {
+      console.log("user is not logged in. redirecting to login");
+      this.router.navigate(['logout']);
+    }
+
     this.route.params
     this.getProcedure(this.route.snapshot.params['id']);
     this.getAllVideosAndPreinstructions();

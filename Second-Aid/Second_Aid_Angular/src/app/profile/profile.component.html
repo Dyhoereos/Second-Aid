@@ -1,3 +1,12 @@
-<p>
-  The patient profile page
-</p>
+<div *ngIf="user">
+	<p>{{user.userName}}</p>
+ 	<p>{{user.firstName}}</p>
+  	<p>{{user.lastName}}</p>
+  	<p>{{user.gender}}</p>
+  	<p>{{user.personalHealthNumber}}</p>
+  	<p>{{user.addressStreet}}</p>
+  	<p>{{user.addressCity}}</p>
+  	<p>{{user.addressProvince}}</p>
+  	<p>{{user.addressPostalCode}}</p>
+  	<p>{{user.addressCountry}}</p>
+</div>
