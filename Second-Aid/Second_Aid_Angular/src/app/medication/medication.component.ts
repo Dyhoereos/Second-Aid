@@ -13,39 +13,52 @@ import { MedicationInstruction } from '../proc/shared/medicationInstruction';
   providers: [AuthService, ProcService]
 })
 export class MedicationComponent implements OnInit {
-  medication: Array<Medication>
-  medicationInstruction: Array<MedicationInstruction> = []  ;
-  constructor(private AuthService: AuthService, private router: Router, private procService: ProcService) { }
+  medication: Array<Medication> = []
+  medicationInstruction: Array<MedicationInstruction> = [];
+  medicationIds: Array<string>;
+  constructor(private AuthService: AuthService, 
+              private router: Router, 
+              private procService: ProcService) { }
 
   ngOnInit() {
   	if (!this.AuthService.isLoggedIn()) {
   		console.log("user is not logged in. redirecting to login");
   		this.router.navigate(['logout']);
   	}
-    this.getMedication()
+
+    this.getMedicationIds()
+    this.getMedicationAndInfo();
   }
 
-  getMedication() { 
-    this.procService.getMedication()
-    .subscribe(
-      data => {console.log("getting medication "); this.medication = data;},
-      err => console.log("get medication error: " + err),
-      () => this.parseMedicationInfo()
-      );
+  getMedicationIds(){
+      var fromLocalStorage = localStorage.getItem('medication_ids');
+      // if (fromLocalStorage === null){
+      //   this.router.navigate('procedures');
+      // }
+      this.medicationIds = fromLocalStorage.split(",");
+  }
+
+  getMedicationAndInfo(){
+    for (let mid of this.medicationIds){
+      this.getMedication(mid);
+      this.getMedicationInfo(mid);
+    }
+  }
+
+  getMedication(id){
+    this.procService.getMedication(id)
+        .subscribe(
+            medication => {console.log("got medication"); this.medication.push(medication)},
+            medErr => {console.log("error getting mediation " + medErr);}
+        );
   }
 
   getMedicationInfo(id) { 
     this.procService.getMedicationInstructions(id)
     .subscribe(
-      data => {console.log("getting medication info " + data); this.buildMedInfoArray(data);},
-      err => console.log("get medication error: " + err)
+      data => {console.log("getting medication info " + data); this.medicationInstruction.push(data) },
+      err => console.log("get medicationinfo error: " + err)
     );
-  }
-
-  parseMedicationInfo(){
-  	for (let p of this.medication){
-  		this.getMedicationInfo(p.medicationId);
-  	}
   }
 
   buildMedInfoArray(medInfo){
