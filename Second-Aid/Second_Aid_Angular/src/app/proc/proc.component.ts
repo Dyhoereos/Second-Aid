@@ -44,10 +44,6 @@ export class ProcComponent implements OnInit {
 
   expandProcedures(procedures) {
     this.procedures = procedures;
-    // var procList: Array<Procedure> = procedure;
-    // for(let p of procList){
-    //   console.log(p.);
-    // }
   }
 
   expandClinic(clinic) {
@@ -58,5 +54,10 @@ export class ProcComponent implements OnInit {
   loadMeds(){
     this.router.navigate(['medication']);
   }
+
+  loadProcDetails(id){
+    this.router.navigate(['procedures/' + id]);
+  }
+
 
 }

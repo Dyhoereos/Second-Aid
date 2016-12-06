@@ -3,5 +3,5 @@ export class Video {
 	title: string;
 	description: string;
 	url: string;
-	subprocedureId: number;
+	subProcedureId: number;
 }

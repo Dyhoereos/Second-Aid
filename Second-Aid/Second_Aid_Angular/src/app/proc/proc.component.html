@@ -22,7 +22,7 @@
                     <button class="btn btn-primary btn-block" (click)="loadMeds()"> Medication </button>
                 </div>
                 <div class="col-lg-6">
-                    <button class="btn btn-primary btn-block"> Instruction </button>
+                    <button class="btn btn-primary btn-block" (click)="loadProcDetails(p.procedureId)"> Instruction </button>
                 </div>
             </div>
             <div *ngIf="true" class="row" id="postSurgeryBtn">

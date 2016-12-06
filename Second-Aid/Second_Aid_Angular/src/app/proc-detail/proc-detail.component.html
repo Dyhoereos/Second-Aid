@@ -1,3 +1,20 @@
-<p>
-  proc-detail works!
-</p>
+<div *ngIf="procedure && neededSubprocedures && preinstructions && videos">
+	<p>Procedure: {{procedure.name}}</p>
+	<div *ngFor="let s of neededSubprocedures">
+		<p>Subprocedure: {{s.name}}</p>
+		<p>Description: {{s.description}}</p>
+	
+		<div *ngFor="let p of (getPreinstructions(s.subProcedureId))">
+			<p>Preinstruction title: {{p.title}}</p>
+			<p>Description: {{p.description}}</p>
+		</div>
+	
+
+		<div *ngFor="let v of getVideos(s.subProcedureId)">
+			<p>Video title: {{v.title}}</p>
+			<p>Description: {{v.description}}</p>
+			<p>Link: {{v.url}}</p>
+		</div>
+		
+	</div>
+</div>

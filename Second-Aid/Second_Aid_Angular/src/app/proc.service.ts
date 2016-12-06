@@ -17,13 +17,13 @@ import 'rxjs/add/operator/toPromise';
 export class ProcService {
 
   private CLINIC_URL = "http://secondaid.azurewebsites.net/api/Clinics/";
-	private MEDICATION_URL = "http://2aid.azurewebsites.net/api/Medications";
+	private MEDICATION_URL = "http://secondaid.azurewebsites.net/api/Medications";
 	private MEDICATION_INSTRUCIONS_URL = "http://secondaid.azurewebsites.net/api/MedicationInstructions";
-	private PREINSTRUCIONS_URL = "http://2aid.azurewebsites.net/api/PreInstructions";
-	private PROCEDURES_URL = "http://2aid.azurewebsites.net/api/Procedures";
+	private PREINSTRUCIONS_URL = "http://secondaid.azurewebsites.net/api/PreInstructions";
+	private PROCEDURES_URL = "http://secondaid.azurewebsites.net/api/Procedures";
 	private QUESTIONS_URL = "http://secondaid.azurewebsites.net/api/Questionnaires/"; // takes subprocedure id
-	private SUBPROCEDURES_URL = "http://2aid.azurewebsites.net/api/SubProcedures";
-	private VIDEOS_URL = "http://2aid.azurewebsites.net/api/Videos";
+	private SUBPROCEDURES_URL = "http://secondaid.azurewebsites.net/api/SubProcedures";
+	private VIDEOS_URL = "http://secondaid.azurewebsites.net/api/Videos";
 
   constructor(private http: Http) { }
 
@@ -56,10 +56,17 @@ export class ProcService {
       .map(response => response.json());
   }
 
-  getPreinstructions(){
+  getPreinstruction(id){
   	let headers = this.getHeaders();
 
-  	return this.http.get(this.PREINSTRUCIONS_URL, {headers})
+  	return this.http.get(this.PREINSTRUCIONS_URL + "/" + id, {headers})
+      .map(response => response.json());
+  }
+
+  getPreinstructions(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PREINSTRUCIONS_URL, {headers})
       .map(response => response.json());
   }
 
@@ -70,24 +77,45 @@ export class ProcService {
     .map(response => response.json());
   }
 
-  getQuestions(){
+  getProcedure(id){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PROCEDURES_URL + "/" + id, {headers})
+    .map(response => response.json());
+  }
+
+  getQuestions(id){
   	let headers = this.getHeaders();
 
-  	return this.http.get(this.QUESTIONS_URL + "1", {headers})
+  	return this.http.get(this.QUESTIONS_URL + "/" + id, {headers})
       .map(response => response.json());
   }
 
   getSubprocedures(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.SUBPROCEDURES_URL, {headers})
+      .map(response => response.json());
+  }
+
+  getSubprocedure(id){
   	let headers = this.getHeaders();
 
-  	return this.http.get(this.SUBPROCEDURES_URL, {headers})
+  	return this.http.get(this.SUBPROCEDURES_URL + "/" + id, {headers})
+      .map(response => response.json());
+  }
+
+  getVideo(id){
+  	let headers = this.getHeaders();
+
+  	return this.http.get(this.VIDEOS_URL + "/" + id, {headers})
       .map(response => response.json());
   }
 
   getVideos(){
-  	let headers = this.getHeaders();
+    let headers = this.getHeaders();
 
-  	return this.http.get(this.VIDEOS_URL, {headers})
+    return this.http.get(this.VIDEOS_URL, {headers})
       .map(response => response.json());
   }
 }

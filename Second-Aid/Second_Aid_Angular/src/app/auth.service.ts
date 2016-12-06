@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthService {
   
-  BASE_URL = "http://2aid.azurewebsites.net"
+  BASE_URL = "http://secondaid.azurewebsites.net"
 
   constructor(private http: Http) {}
 
@@ -29,7 +29,7 @@ export class AuthService {
     login(username, password) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let creds: string = 'username='+username+'&password='+password+'&grant_type=password';
+    let creds: string = 'username='+username+'&password='+password+'&grant_type=password'+'&clinic_id=1';
     return this.http
       .post(
         this.BASE_URL + '/connect/token',

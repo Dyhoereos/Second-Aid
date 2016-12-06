@@ -28,7 +28,7 @@ export class MedicationComponent implements OnInit {
   getMedication() { 
     this.procService.getMedication()
     .subscribe(
-      data => {console.log("getting medication "); this.medication = data},
+      data => {console.log("getting medication "); this.medication = data;},
       err => console.log("get medication error: " + err),
       () => this.parseMedicationInfo()
       );
@@ -37,9 +37,9 @@ export class MedicationComponent implements OnInit {
   getMedicationInfo(id) { 
     this.procService.getMedicationInstructions(id)
     .subscribe(
-      data => {console.log("getting medication info " + data); this.buildMedInfoArray(data)},
+      data => {console.log("getting medication info " + data); this.buildMedInfoArray(data);},
       err => console.log("get medication error: " + err)
-      );
+    );
   }
 
   parseMedicationInfo(){
