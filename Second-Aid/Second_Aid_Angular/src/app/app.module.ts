@@ -37,7 +37,6 @@ import { MedicationComponent } from './medication/medication.component';
           { path: 'login', component: LoginComponent },
           { path: 'logout', component: LogoutComponent },
           { path: 'medication', component: MedicationComponent },
-          // { path: 'procedures', component: ProcComponent, canActivate: [AuthGuard] },
           { path: 'procedures', component: ProcComponent},
           { path: 'procedures/:id', component: ProcDetailComponent},
           { path: 'profile', component: ProfileComponent},

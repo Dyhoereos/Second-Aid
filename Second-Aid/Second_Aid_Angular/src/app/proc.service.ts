@@ -31,7 +31,6 @@ export class ProcService {
   private PATIENTPROC_URL = "http://secondaid.azurewebsites.net/api/patientprocedures";
   private PATIENTSCHED_URL = "http://secondaid.azurewebsites.net/api/schedules";
 
-
   constructor(private http: Http) { }
 
   getHeaders(){
@@ -56,10 +55,10 @@ export class ProcService {
       .map(response => response.json());
   }
 
-  getMedication(){
-  	let headers = this.getHeaders();
+  getMedication(id){
+    let headers = this.getHeaders();
 
-  	return this.http.get(this.MEDICATION_URL, {headers})
+    return this.http.get(this.MEDICATION_URL + "/" + id, {headers})
       .map(response => response.json());
   }
 
