@@ -9,6 +9,7 @@ import { Question } from './proc/shared/question';
 import { Subprocedure } from './proc/shared/subprocedure';
 import { Video } from './proc/shared/video';
 import { Patientproc } from './Patientproc';
+import { Schedule } from './schedule';
 
 
 import 'rxjs/add/operator/map';
@@ -28,7 +29,7 @@ export class ProcService {
   private PATIENT_URL = "http://secondaid.azurewebsites.net/api/UserInfo";
 	private VIDEOS_URL = "http://secondaid.azurewebsites.net/api/Videos";
   private PATIENTPROC_URL = "http://secondaid.azurewebsites.net/api/patientprocedures";
-  // private PATIENT_PROCEDURE_URL
+  private PATIENTSCHED_URL = "http://secondaid.azurewebsites.net/api/schedules";
 
   constructor(private http: Http) { }
 
@@ -143,5 +144,12 @@ export class ProcService {
 
     return this.http.get(this.PATIENTPROC_URL, {headers})
       .map(response => response.json() as Patientproc[]);
+  }
+
+  getPatientSchedule(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PATIENTSCHED_URL, {headers})
+      .map(response => response.json() as Schedule[]);
   }
 }
