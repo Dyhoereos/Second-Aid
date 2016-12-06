@@ -1,6 +1,6 @@
 <div *ngIf="procedures && clinic" class="procedure">
 
-    <accordion *ngFor="let p of procedures" [showArrows]="true" [closeOthers]="false" [expandAll]="false">
+    <accordion *ngFor="let p of procedures; let i = index;" [showArrows]="true" [closeOthers]="false" [expandAll]="false">
 
         <!-- Procedure Description Modal-->
         <div id="procDescModal" class="modal fade" role="dialog">
@@ -34,7 +34,7 @@
                     <label class="form-control"> Doctor: {{clinic.firstName}} {{clinic.lastName}}</label>
                 </div>
                 <div class="col-lg-6">
-                    <label class="form-control"> Time: ???</label>
+                    <label class="form-control"> Time:  {{schedule[i] +"-08:00" | date: "hh:mm a"}}</label>
                 </div>
             </div>
             <div class="row text-center">
@@ -56,44 +56,5 @@
                 </div>
             </div>
         </accordion-group>
-        <!-- <accordion-group heading="Knee Surgery">
-            <div class="row">
-                <div class="col-lg-6 ">
-                    <label class="form-control"> Clinic: ???</label>
-                </div>
-                <div class="col-lg-6">
-                    <label class="form-control"> Phone number: ???</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 ">
-                    <label class="form-control"> Doctor: ???</label>
-                </div>
-                <div class="col-lg-6">
-                    <label class="form-control"> Time: ???</label>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col-lg-6">
-                    <button class="btn btn-primary btn-block"> Medication </button>
-                </div>
-                <div class="col-lg-6">
-                    <button class="btn btn-primary btn-block"> Instruction </button>
-                </div>
-            </div>
-            <div *ngIf="true" class="row" id="postSurgeryBtn">
-                <div class="col-lg-12">
-                    <button class="btn btn-danger btn-block"> Post Surgery Survey! </button>
-                </div>
-            </div>
-        </accordion-group> -->
-        <!--<accordion-group heading="Knee Surgery 3">
-            <b>Clinic:</b> Vancouver General Hospital<br>
-            <b>Date:</b> January 27, 2017
-        </accordion-group>
-        <accordion-group heading="Knee Surgery 4">
-            <b>Clinic:</b> Vancouver General Hospital<br>
-            <b>Date:</b> January 27, 2017
-        </accordion-group>-->
     </accordion>
 </div>
