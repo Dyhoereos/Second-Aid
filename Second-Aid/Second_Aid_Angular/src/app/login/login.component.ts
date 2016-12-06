@@ -6,6 +6,7 @@ import { Token } from '../token';
 import { Router } from '@angular/router';
 import { ProcService } from '../proc.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

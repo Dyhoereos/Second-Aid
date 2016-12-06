@@ -8,6 +8,8 @@ import { Procedure } from './proc/shared/procedure';
 import { Question } from './proc/shared/question';
 import { Subprocedure } from './proc/shared/subprocedure';
 import { Video } from './proc/shared/video';
+import { Patientproc } from './Patientproc';
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -25,6 +27,7 @@ export class ProcService {
 	private SUBPROCEDURES_URL = "http://secondaid.azurewebsites.net/api/SubProcedures";
   private PATIENT_URL = "http://secondaid.azurewebsites.net/api/UserInfo";
 	private VIDEOS_URL = "http://secondaid.azurewebsites.net/api/Videos";
+  private PATIENTPROC_URL = "http://secondaid.azurewebsites.net/api/patientprocedures";
 
   constructor(private http: Http) { }
 
@@ -89,7 +92,7 @@ export class ProcService {
     let headers = this.getHeaders();
 
     return this.http.get(this.PROCEDURES_URL + "/" + id, {headers})
-    .map(response => response.json());
+    .map(response => response.json() as Procedure);
   }
 
   getQuestions(id){
@@ -132,5 +135,12 @@ export class ProcService {
 
     return this.http.get(this.VIDEOS_URL, {headers})
       .map(response => response.json());
+  }
+
+  getPatientProcedure(){
+    let headers = this.getHeaders();
+
+    return this.http.get(this.PATIENTPROC_URL, {headers})
+      .map(response => response.json() as Patientproc[]);
   }
 }
