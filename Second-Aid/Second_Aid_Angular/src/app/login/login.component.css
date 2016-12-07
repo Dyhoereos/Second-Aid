@@ -4,6 +4,7 @@
     color: #ffffff;
     border: solid 0px #8AA383;
     font-size: 20px;
+    text-align: center;
     
 }
 .form-control{
@@ -13,6 +14,7 @@
     margin-right: auto;
     margin-top: 20px;
     font-size:18px;
+    text-align: left;
 }
 #loginForm{
     background-color: #F5F5F5;
