@@ -1,3 +1,6 @@
-<div *ngFor="let q of questions">
-{{q.questionBody}}
-</div>
+<div *ngFor="let qn of questionnaires">
+	<p>{{qn.name}}</p>
+	<div *ngFor="let q of qn.questions">
+		<p>{{q.questionBody}}</p>
+	</div>
+</div>	

@@ -44,10 +44,18 @@ export class ProcComponent implements OnInit {
   }
   
 extractScheduleInfo(procedures: Schedule[]){
+  procedures.sort((lhs, rhs): number => {
+      var lDate = new Date(lhs.time).getTime();
+      var rDate = new Date(rhs.time).getTime();
+      if (lDate == rDate) return 0;
+      return lDate < rDate ? -1 : 1;
+    });
+
     //save all patient's procedure ids
     for(var i = 0; i<procedures.length; i++){
       this.patientProcedures.push(procedures[i].procedureId);
       this.schedule.push(procedures[i].time);
+      console.log("completed? " + procedures[i].isCompleted);
       this.isComplete.push(procedures[i].isCompleted)
       console.log(this.schedule[i]);
     }
@@ -64,16 +72,23 @@ getProcedures() {
 }
   
 expandProcedures(procedures: Procedure[]) {
-    var i = 0;
+    // var i = 0;
     var j = 0;
-    while(i< this.patientProcedures.length){
-      if(procedures[j].procedureId == this.patientProcedures[i]){
-        this.procedures.push(procedures[j]);
-        i++;
-        //j=0; should be in order
-      }
-      else
-        j++;
+    // while(i< this.patientProcedures.length && j < procedures.length){
+    //   if(procedures[j].procedureId == this.patientProcedures[i]){
+    //     this.procedures.push(procedures[j]);
+    //     i++;
+    //     //j=0; should be in order
+    //   }
+    //   else
+    //     j++;
+    // }
+    for (let pat of this.patientProcedures){
+        for (let procs of procedures){
+            if (procs.procedureId == pat) {                
+                this.procedures.push(procs)
+            }
+        }
     }
 }
 //**********end Patient Schedule**********
@@ -114,7 +129,6 @@ expandProcedures(procedures: Procedure[]) {
   }
 
   loadMeds(id){
-
     this.patientMedsToStorage(id);
     this.router.navigate(['medication']);
   }
@@ -138,4 +152,8 @@ expandProcedures(procedures: Procedure[]) {
     localStorage.setItem('medication_ids', medString);
   }
 
+  loadQuestions(id){
+      console.log("navigating to questions with proc id " + id);
+      this.router.navigate(['questions/' + id]);
+  }
 }

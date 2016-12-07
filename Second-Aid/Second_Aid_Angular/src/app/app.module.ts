@@ -42,6 +42,7 @@ import { QuestionComponent } from './question/question.component';
           { path: 'procedures', component: ProcComponent},
           { path: 'procedures/:id', component: ProcDetailComponent},
           { path: 'profile', component: ProfileComponent},
+          { path: 'questions/:id', component: QuestionComponent},
           { path: '**', component: NotFoundComponent}
           ])
   ],

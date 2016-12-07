@@ -51,8 +51,9 @@
                 </div>
             </div>
             <div *ngIf="isComplete[i]" class="row" id="postSurgeryBtn">
+            <!-- <div class="row" id="postSurgeryBtn"> -->
                 <div class="col-lg-12">
-                    <button class="btn btn-danger btn-block"> Post Surgery Survey! </button>
+                    <button class="btn btn-danger btn-block" (click)="loadQuestions(p.procedureId)"> Post Surgery Survey! </button>
                 </div>
             </div>
         </accordion-group>

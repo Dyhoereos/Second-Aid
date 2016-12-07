@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { ProcService } from '../proc.service';
 import { Question } from '../proc/shared/question'
+import { Questionnaire } from '../proc/shared/questionnaire'
 import { Subprocedure } from '../proc/shared/subprocedure'
 
 @Component({
@@ -15,7 +16,7 @@ export class QuestionComponent implements OnInit {
   subprocedureIds: Array<number> = [];
   procedureId: number;
   subprocedures: Array<Subprocedure>;
-  questions: Array<Question> = []; 
+  questionnaires: Array<Questionnaire> = []; 
   constructor(private AuthService: AuthService, 
               private router: Router, 
               private procService: ProcService, 
@@ -28,16 +29,16 @@ export class QuestionComponent implements OnInit {
   		this.router.navigate(['logout']);
   	}
   	this.procedureId = this.route.snapshot.params['id'];
-  	this.getProcedure(this.procedureId);
+  	this.getSubProcs();
   }
 
-  getProcedure(id){
-  		this.procService.getProcedure(id)
-  			.subscribe(
-  				proc => {console.log("got proc "); this.getSubProcs(); },
-  				procErr => {console.log("error getting proc " + procErr);}
-  			);
-  }
+  // getProcedure(id){
+  // 		this.procService.getProcedure(id)
+  // 			.subscribe(
+  // 				proc => {console.log("got proc "); this.getSubProcs(); },
+  // 				procErr => {console.log("error getting proc " + procErr);}
+  // 			);
+  // }
 
   getSubProcs(){
   		this.procService.getSubprocedures()
@@ -48,6 +49,8 @@ export class QuestionComponent implements OnInit {
   }
 
   selectSubProcs(subprocs){
+      console.log("this proc " + this.procedureId);
+      console.log("top s len " + subprocs.length);
   		var neededSubProcs: Array<Subprocedure> = [];
   		for(let s of subprocs){
   			if (s.procedureId == this.procedureId){
@@ -66,14 +69,14 @@ export class QuestionComponent implements OnInit {
   			);
   }
 
-  selectQuestions(questions, subprocs){
+  selectQuestions(questionnaires, subprocs){
   		for(let s of subprocs){
-  			for (let q of questions){
-  				if (q.subprocedureId == s.subprocedureId){
-  					questions.push(q);
+  			for (let q of questionnaires){
+  				if (q.subProcedureId == s.subProcedureId){
+              this.questionnaires.push(q);
   				}
   			}
-  		}
+  		}      
   }
 
 }
