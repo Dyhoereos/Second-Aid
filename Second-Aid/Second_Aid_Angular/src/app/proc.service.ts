@@ -62,10 +62,10 @@ export class ProcService {
       .map(response => response.json());
   }
 
-  getMedicationInstructions(id){
+  getMedicationInstructions(){
   	let headers = this.getHeaders();
 
-  	return this.http.get(this.MEDICATION_INSTRUCIONS_URL + '/' + id, {headers})
+  	return this.http.get(this.MEDICATION_INSTRUCIONS_URL, {headers})
       .map(response => response.json());
   }
 

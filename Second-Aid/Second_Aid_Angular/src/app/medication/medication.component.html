@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" *ngIf="medicationInstruction">
 <thead>
         <tr>
             <th>
@@ -21,7 +21,7 @@
                 {{m.description}}
             </td>
             <td>
-                {{(displayMedInfoDesc(m?.medicationId))}}
+                {{displayMedInfoDesc(m.medicationId)}}
             </td>
         </tr>
 	</tbody>

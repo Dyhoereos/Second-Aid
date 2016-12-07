@@ -14,7 +14,7 @@ import { MedicationInstruction } from '../proc/shared/medicationInstruction';
 })
 export class MedicationComponent implements OnInit {
   medication: Array<Medication> = []
-  medicationInstruction: Array<MedicationInstruction> = [];
+  medicationInstruction: Array<MedicationInstruction>;
   medicationIds: Array<string>;
   constructor(private AuthService: AuthService, 
               private router: Router, 
@@ -30,18 +30,23 @@ export class MedicationComponent implements OnInit {
     this.getMedicationAndInfo();
   }
 
+
   getMedicationIds(){
-      var fromLocalStorage = localStorage.getItem('medication_ids');
-      // if (fromLocalStorage === null){
-      //   this.router.navigate('procedures');
-      // }
-      this.medicationIds = fromLocalStorage.split(",");
+      if (localStorage.getItem('medication_ids') == null){
+          //  not working :(
+          this.router.navigate(['']);
+          console.log("in false");
+      } else {
+          console.log("from storage " + localStorage.getItem('medication_ids'));
+          var fromLocalStorage = localStorage.getItem('medication_ids');
+          this.medicationIds = fromLocalStorage.split(",");
+      }
   }
 
   getMedicationAndInfo(){
     for (let mid of this.medicationIds){
-      this.getMedication(mid);
-      this.getMedicationInfo(mid);
+        this.getMedication(mid);
+        this.getMedicationInfo(mid);
     }
   }
 
@@ -54,10 +59,11 @@ export class MedicationComponent implements OnInit {
   }
 
   getMedicationInfo(id) { 
-    this.procService.getMedicationInstructions(id)
+    this.procService.getMedicationInstructions()
     .subscribe(
-      data => {console.log("getting medication info " + data); this.medicationInstruction.push(data) },
+      data => {console.log("got medication info"); this.medicationInstruction = data },
       err => console.log("get medicationinfo error: " + err)
+      // () => checkMeds(data)
     );
   }
 
@@ -72,6 +78,8 @@ export class MedicationComponent implements OnInit {
   }
 
   displayMedInfoDesc(id){
+    console.log("id is " + id);
+    console.log("instr length " + this.medicationInstruction.length);
       if (this.medicationInstruction.filter(x => x.medicationId == id)[0]){
         return this.medicationInstruction.filter(x => x.medicationId == id)[0].instruction;
       }
