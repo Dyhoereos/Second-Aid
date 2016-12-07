@@ -1,6 +1,26 @@
 <div *ngFor="let qn of questionnaires">
-	<p>{{qn.name}}</p>
-	<div *ngFor="let q of qn.questions">
-		<p>{{q.questionBody}}</p>
-	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="col-xs-5 col-sm-3 col-lg-3" colspan="2">
+					{{qn.name}}
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let q of qn.questions">
+				<td>
+					{{q.questionBody}}
+				</td>
+				<td>
+					<input type="checkbox">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="submit">
 </div>	
+
+<div id="backBtnArea" class="col-xs-12 col-sm-12 col-lg-12">
+	<a class="backBtn" routerLink="">Back</a>
+</div>
