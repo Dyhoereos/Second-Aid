@@ -6,48 +6,44 @@
     android:background="#EEE5E9"
     android:padding="8dp">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Procedures"
+        android:text="Questionaire"
         android:textColor="#333639"
         android:textAlignment="center"
         android:gravity="center"
         android:textStyle="bold|italic"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/data_listview"
-        android:layout_alignEnd="@+id/data_listview" />
+        android:id="@+id/listTitle" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#4A4E69"
         android:layout_margin="5dp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/listTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/imageView" />
+        android:id="@+id/divider" />
     <ListView
-        android:minWidth="25dp"
-        android:minHeight="25dp"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:id="@+id/data_listview"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/logout_button"
-        android:layout_below="@+id/imageView" />
+        android:layout_height="match_parent"
+        android:descendantFocusability="afterDescendants"
+        android:id="@+id/questionListView"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/divider"
+        android:layout_alignLeft="@+id/divider"
+        android:layout_alignStart="@+id/divider"
+        android:layout_above="@+id/submitButton" 
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"/>
     <Button
-        android:text="Logout"
+        android:text="Submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#4A4E69"
-        android:id="@+id/logout_button"
-        android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/data_listview"
-        android:layout_alignStart="@+id/data_listview" />
+        android:id="@+id/submitButton" />
 </RelativeLayout>
