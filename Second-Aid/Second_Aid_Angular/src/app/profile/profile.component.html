@@ -1,12 +1,89 @@
-<div *ngIf="user">
-	<p>{{user.userName}}</p>
- 	<p>{{user.firstName}}</p>
-  	<p>{{user.lastName}}</p>
-  	<p>{{user.gender}}</p>
-  	<p>{{user.personalHealthNumber}}</p>
-  	<p>{{user.addressStreet}}</p>
-  	<p>{{user.addressCity}}</p>
-  	<p>{{user.addressProvince}}</p>
-  	<p>{{user.addressPostalCode}}</p>
-  	<p>{{user.addressCountry}}</p>
+<table class="table" *ngIf="user">
+	<thead>
+        <tr>
+			<th class="col-xs-4 col-sm-4 col-lg-4">
+				Username:
+			</th>
+            <th class="col-xs-8 col-sm-8 col-lg-8">
+                {{user.userName}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr>
+			<td>
+				Firstname:
+			</td>
+            <td>
+				{{user.firstName}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				Lastname:
+			</td>
+            <td>
+				{{user.lastName}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				Gender:
+			</td>
+            <td>
+				{{user.gender}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				Personal Health Number:
+			</td>
+            <td>
+				{{user.personalHealthNumber}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				Street:
+			</td>
+            <td>
+				{{user.addressStreet}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				City:
+			</td>
+            <td>
+				{{user.addressCity}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				Province:
+			</td>
+            <td>
+				{{user.addressProvince}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				Postal Code:
+			</td>
+            <td>
+				{{user.addressPostalCode}}
+            </td>
+        </tr>
+		<tr>
+			<td>
+				Country:
+			</td>
+            <td>
+				{{user.addressCountry}}
+            </td>
+        </tr>
+	</tbody>
+</table>
+<div id="backBtnArea" class="col-xs-12 col-sm-12 col-lg-12">
+	<a class="backBtn" routerLink="../procedures">Back</a>
 </div>
